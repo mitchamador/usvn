@@ -101,7 +101,7 @@ class ProjectController extends USVN_Controller
 		$this->view->project = $this->_project;
 		$SVN = new USVN_SVN($this->_project->name);
 		$config = Zend_Registry::get('config');
-		$this->view->subversion_url = $config->subversion->url . $this->_project->name;
+		$this->view->subversion_url = USVN_SVNUtils::getSubversionUrl($this->_project->name, '');
 		foreach ($SVN->listFile('/') as $dir) {
 			if ($dir['name'] == 'trunk')
 				$this->view->subversion_url .= '/trunk';

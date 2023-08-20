@@ -383,6 +383,11 @@ class USVN_SVNUtils
 	{
 		$config = Zend_Registry::get('config');
 		$url = $config->subversion->url;
+
+		preg_match('{(\w+:\/\/)(.*?)\/(.*)}', $url, $_url);
+		$host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_url[2];
+		$url = $_url[1] . $host . '/' . $_url[3];
+
 		if (substr($url, -1, 1) != '/') {
 			$url .= '/';
 		}
